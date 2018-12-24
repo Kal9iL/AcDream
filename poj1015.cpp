@@ -15,7 +15,6 @@ int main()
     while(scanf("%d%d",&n,&m) && (m!= 0 && n != 0))
     {
         count ++;
-        //int pi,di;
         memset(dp,-1,sizeof(dp));
         memset(path,-1,sizeof(path));
         int pi[200 + 10],di[200 + 10];
@@ -43,7 +42,6 @@ int main()
                             int temp = path[i - 1 - counti][k];
                             while(temp != -1)
                             {
-                                //cout << temp << endl;
                                 if(temp == j)
                                 {
                                     flag = true;
@@ -54,18 +52,14 @@ int main()
                             }
                             if(!flag)
                             {
-                                
                                 dp[i][k + (pi[j] - di[j])] =  dp[i - 1][k] + di[j] + pi[j];
                                 path[i][k + (pi[j] - di[j])] = j;
-                                //printf("path[%d][%d] = %d  ",i,pi[j] - di[j], j); 
-                                //printf("dp[%d][%d] = %d\n",i,pi[j] - di[j],dp[i][k + (pi[j] -di[j])]);
                             }
                         }
                     }
                 }
             }
         }
-       // printf("after dp\n");
         int pro = 0,def = 0;
         int ans_list[20 + 10];
         int counti = 0;
@@ -77,9 +71,6 @@ int main()
                 {
                     int temp = path[m][4010 - i];
                     int startk = 4010 - i;
-                    //int counti = 0;
-                    //int temp = path[m - counti][startk];
-                    //cout << "temp = " << temp << " " ;
                     while(temp != -1)
                     {
                         pro += pi[temp];
@@ -87,17 +78,12 @@ int main()
                         ans_list[counti] = temp;
                         counti ++;
                         temp = path[m - counti ][startk = startk - (pi[temp] - di[temp])];
-                      //  cout << temp << " ";
                     }
-                    //cout << endl;
                 }
                 else
                 {
                     int temp = path[m][4010 + i];
                     int startk = 4010 + i;
-                    //int counti = 0;
-                    //int temp = path[m - counti][startk];
-                    //cout << "temp = " << temp << " " ;
                     while(temp != -1)
                     {
                         pro += pi[temp];
@@ -105,21 +91,18 @@ int main()
                         ans_list[counti] = temp;
                         counti ++;
                         temp = path[m - counti ][startk = startk - (pi[temp] - di[temp])];
-                      //  cout << temp << " ";
                     }
-                    //cout << endl;
+                    
                 }
                 break;
             }
         }
-        //cout << counti << endl;
         printf("Jury #%d\n",count);
         printf("Best jury has value %d for prosecution and value %d for defence:\n",pro,def);
         sort(ans_list,ans_list + m);
         for(int i = 0;i <  m;i ++)
             printf(" %d",ans_list[i]);
         printf("\n");
-        //printf("%d\n",ans_value);
     }
     return 0;
 }
