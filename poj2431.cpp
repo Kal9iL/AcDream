@@ -7,26 +7,30 @@ using namespace std;
 
 const int MAXN = 1000000 + 10;
 
-int n,L,P;
-int d[MAXN];
+int L,P,N;
+int fuel[MAXN];
+
 priority_queue<int> q;
 
 int main()
 {
-	scanf("%d",&n);
-	int stop,amount;
-	memset(d,0,sizeof(d));
-	for(int i = 0;i < n;i ++)
+	scanf("%d",&N);
+	for(int i = 0; i < N; i ++)
 	{
-		scanf("%d%d",&stop,&amount);
-		d[stop] = amount;
+		int x,y;
+		scanf("%d%d",&x,&y);
+		fuel[x] = y;
 	}
 	scanf("%d%d",&L,&P);
 	int ans = 0;
-	for(int i = L - 1;i >= 0;i --)
+	for(int i = 1;i < L ; i ++)
 	{
+		if(fuel[L - i] > 0)
+		{
+			q.push(fuel[L -i]);
+		}
 		P --;
-		if(P < 0)
+		if(P <= 0)
 		{
 			if(!q.empty())
 			{
@@ -40,11 +44,6 @@ int main()
 				break;
 			}
 		}
-		if(d[i] > 0)
-		{
-			q.push(d[i]);
-		}
 	}
 	printf("%d\n",ans);
-
 }
